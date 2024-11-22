@@ -2,233 +2,136 @@ import java.util.Scanner;
 
 public class Buying {
     private Scanner scan;
+    private Inventory inv;
     private int lemons;
     private int cups;
     private int ice;
     private int sugar;
-    private int currentMoney;
+    private double currentMoney;
 
-    public Buying(){
-        lemons = 0;
-        cups = 0;
-        ice = 0;
-        sugar = 0;
-        currentMoney = 20;
-    }
+//    public Buying(){
+//        lemons = 0;
+//        cups = 0;
+//        ice = 0;
+//        sugar = 0;
+//        currentMoney = 20;
+//    }
 
-    public Buying(int lemons,int cups, int ice, int sugar, int currentMoney){
-        this.lemons = lemons;
-        this.cups = cups;
-        this.ice = ice;
-        this.sugar = sugar;
-        this.currentMoney = currentMoney;
+    public Buying(Inventory inv) {
+        this.inv = inv;
+//        lemons = inv.getLemons();
+//        cups = inv.getCups();
+//        ice = inv.getIce();
+//        sugar = inv.getSugar();
+//        currentMoney = inv.getCurrentMoney();
     }
     //contructor(no params): set everything to 0 and money to 20
     //overloaded constructor(all params-5): allow input params
     //getter methods for all items
 
-    public int getLemons(){
-        return lemons;
+
+    public void printInventory() {
+        System.out.println(inv.getCurrentMoney());
+        System.out.println(inv.getCups());
+        System.out.println(inv.getLemons());
+        System.out.println(inv.getSugar());
+        System.out.println(inv.getIce());
     }
 
-    public int getCups(){
-        return cups;
+    public void printCurrentAdjustments(){
+        System.out.println("Total money " +inv.getCurrentMoney());
+        System.out.println("1. cup price $" +inv.getCupPrice());
+        System.out.println("2. lemons per cup " +inv.getLemonAdjustment());
+        System.out.println("3. sugar per cup " +inv.getSugarAdjustment());
+        System.out.println("4. ice per cup " +inv.getIceAdjustment());
+
+    }
+/*
+offer info: num item, cost,
+
+ */
+
+    private void buyItem(int numItem, double cost, String item) {
+        boolean offerAgain1 = true;
+        int offerVal = 0;
+        double totalPrice = 0;
+        while (offerAgain1) {
+            System.out.println("This offer for " + item + " is " + numItem + " for " + cost + ". How many of this offer would you like to purchase?");
+            scan = new Scanner(System.in);
+            offerVal = scan.nextInt();
+            totalPrice = cost * 5;
+            if (totalPrice > inv.getCurrentMoney()) {
+                offerVal = 0;
+                System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
+                scan.nextLine();
+                String purchaseAgain = scan.nextLine();
+                if (purchaseAgain.equals("y")) {
+                    offerAgain1 = true;
+                } else {
+                    offerAgain1 = false;
+                }
+            }
+
+        }
+        int itemsBought = offerVal * numItem;
+        if (item.equals("cups")) {
+            inv.incrementCups(itemsBought);
+        }
+        if (item.equals("lemons")) {
+            inv.incrementLemons(itemsBought);
+        }
+        if (item.equals("ice")) {
+            inv.incrementIce(itemsBought);
+        }
+        if (item.equals("sugar")) {
+            inv.incrementSugar(itemsBought);
+        }
+        currentMoney -= totalPrice;
+        System.out.println("You've purchased " + (itemsBought) + item + "!");//prints total?
     }
 
-    public int getIce(){
-        return ice;
-    }
-
-    public int getSugar(){
-        return sugar;
-    }
-
-    public int getCurrentMoney(){
-        return currentMoney;
-    }
-
-    public void printInventory(){
-        System.out.println(currentMoney);
-        System.out.println(cups);
-        System.out.println(lemons);
-        System.out.println(sugar);
-        System.out.println(ice);
-    }
-
-    public void cupsOffer(){
-        System.out.println("There are 2 offers to choose from: \n5 cups for $5 and 10 cups for $9 \nWhich would you like?(type offer word for word)");
+    public void cupsOffer() {
+        System.out.println("There are 2 offers to choose from: \n1) 5 cups for $5 \n2) 10 cups for $9 \n Which would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-        if(offerChoice.equals("5 cups for $5")){
-            boolean offerAgain1 = true;
-            while(offerAgain1){
-                System.out.println("This offer for cups is 5 cups for $5.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyCups = offerVal * 5;
-                if(moneyCups > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchaseAgain = scan.nextLine();
-                    if(purchaseAgain.equals("y")){
-                        offerAgain1 = true;
-                    } else {
-                        offerAgain1 = false;
-                    }
-                }
-                cups += 5 * offerVal;
-                currentMoney -=moneyCups;
-            }
-            System.out.println("You've purchased " + cups + "!");
+        if (offerChoice.equals("1")) {
+            buyItem(5, 5, "cups");
+
         } else {
-            boolean offerAgain2 = true;
-            while(offerAgain2){
-                System.out.println("This offer for cups is 10 cups for $9.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyCups = offerVal * 9;
-                if(moneyCups > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchaseAgain = scan.nextLine();
-                    if(purchaseAgain.equals("y")){
-                        offerAgain2 = true;
-                    } else {
-                        offerAgain2 = false;
-                    }
-                }
-                cups += 10 * offerVal;
-                currentMoney -= moneyCups;
-            }
-            System.out.println("You've purchased " + cups + "!");
+            buyItem(20, 9, "cups");
         }
 
     }
 
-    public void lemonsOffer(){
-        System.out.println("There are 2 offers to choose from: \n5 lemons for $3 and 10 lemons for $5 \nWhich would you like?(type offer word for word)");
+    public void lemonsOffer() {
+        System.out.println("There are 2 offers to choose from: \n1) 5 lemons for $3\n2) 10 lemons for $5 \n Which would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-        if(offerChoice.equals("5 lemons for $3")){
-            boolean offerAgain1 = true;
-            while(offerAgain1){
-                System.out.println("This offer for cups is 5 lemons for $3.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyLemons = offerVal * 3;
-                if(moneyLemons > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchaseAgain = scan.nextLine();
-                    if(purchaseAgain.equals("y")){
-                        offerAgain1 = true;
-                    } else {
-                        offerAgain1 = false;
-                    }
-                }
-                lemons += 5 * offerVal;
-                currentMoney -=moneyLemons;
-            }
-            System.out.println("You've purchased " + lemons + "!");
+        if (offerChoice.equals("1")) {
+            buyItem(5, 3, "lemons");
         } else {
-            boolean offerAgain2 = true;
-            while(offerAgain2){
-                System.out.println("This offer for lemons is 10 lemons for $5.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyLemons = offerVal * 5;
-                if(moneyLemons > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchase = scan.nextLine();
-                    if(purchase.equals("y")){
-                        offerAgain2 = true;
-                    } else {
-                        offerAgain2 = false;
-                    }
-                }
-                lemons += 10 * offerVal;
-                currentMoney -= moneyLemons;
-            }
-            System.out.println("You've purchased " + lemons + "!");
+            buyItem(10, 5, "lemons");
         }
 
     }
 
-    public void iceOffer(){
-        System.out.println("There are 2 offers to choose from: \n10 cubes of ice for $2 and 20 cubes of ice for $3 \nWhich would you like?(type offer word for word)");
+    public void iceOffer() {
+        System.out.println("There are 2 offers to choose from: \n1) 10 cubes of ice for $2\n2) 20 cubes of ice for $3 \nWhich would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-        if(offerChoice.equals("10 cubes of ice for $2")){
-            boolean offerAgain1 = true;
-            while(offerAgain1){
-                System.out.println("This offer for cups is 10 cubes of ice for $2.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyIce = offerVal * 2;
-                if(moneyIce > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchaseAgain = scan.nextLine();
-                    if(purchaseAgain.equals("y")){
-                        offerAgain1 = true;
-                    } else {
-                        offerAgain1 = false;
-                    }
-                }
-                ice += 10 * offerVal;
-                currentMoney -= moneyIce;
-            }
-            System.out.println("You've purchased " + ice + "!");
+        if (offerChoice.equals("1")) {
+            buyItem(10, 2, "ice");
         } else {
-            boolean offerAgain2 = true;
-            while(offerAgain2){
-                System.out.println("This offer for ice is 20 cubes of ice for $3.\n How many of this offer would you like to purchase?");
-                scan = new Scanner(System.in);
-                int offerVal = scan.nextInt();
-                int moneyIce = offerVal * 5;
-                if(moneyLemons > currentMoney){
-                    offerVal = 0;
-                    System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                    scan.nextLine();
-                    String purchase = scan.nextLine();
-                    if(purchase.equals("y")){
-                        offerAgain2 = true;
-                    } else {
-                        offerAgain2 = false;
-                    }
-                }
-                lemons += 10 * offerVal;
-                currentMoney -= moneyLemons;
-            }
-            System.out.println("You've purchased " + lemons + "!");
+            buyItem(20, 3, "ice");
         }
     }
 
     public void sugarOffer(){
-        boolean offerAgain = true;
-        while(offerAgain){
-            System.out.println("The offer for sugar is .\n How many of this offer would you like to purchase?");
-            scan = new Scanner(System.in);
-            int offerVal = scan.nextInt();
-            int moneyIce = offerVal * 4;
-            if(moneyIce > currentMoney){
-                System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                scan.nextLine();
-                String purchaseIce = scan.nextLine();
-                if(purchaseIce.equals("y")){
-                    offerAgain = true;
-                } else {
-                    offerAgain = false;
-                }
-            }
-            ice += 10 * offerVal;
+        System.out.println("There are 2 offers to choose from: \n1) 2 cups of sugar for $3\n2) 5 cups of sugar for $4 \nWhich would you like?(type 1 or 2)");
+        String offerChoice = scan.nextLine();
+        if (offerChoice.equals("1")) {
+            buyItem(2, 3, "sugar");
+        } else {
+            buyItem(5, 4, "sugar");
+
         }
-        System.out.println("You've purchased " + ice + "!");
+        //item(): 2-3 offers, display offers, which offer do you want?, how many times do you want to buy this offer?
     }
-
-
-    //item(): 2-3 offers, display offers, which offer do you want?, how many times do you want to buy this offer?
 }
