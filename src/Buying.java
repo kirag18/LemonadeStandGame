@@ -3,31 +3,12 @@ import java.util.Scanner;
 public class Buying {
     private Scanner scan;
     private Inventory inv;
-    private int lemons;
-    private int cups;
-    private int ice;
-    private int sugar;
-    private double currentMoney;
 
-//    public Buying(){
-//        lemons = 0;
-//        cups = 0;
-//        ice = 0;
-//        sugar = 0;
-//        currentMoney = 20;
-//    }
+
 
     public Buying(Inventory inv) {
         this.inv = inv;
-//        lemons = inv.getLemons();
-//        cups = inv.getCups();
-//        ice = inv.getIce();
-//        sugar = inv.getSugar();
-//        currentMoney = inv.getCurrentMoney();
     }
-    //contructor(no params): set everything to 0 and money to 20
-    //overloaded constructor(all params-5): allow input params
-    //getter methods for all items
 
 
     public void printInventory() {
@@ -45,49 +26,6 @@ public class Buying {
         System.out.println("3. sugar per cup " +inv.getSugarAdjustment());
         System.out.println("4. ice per cup " +inv.getIceAdjustment());
 
-    }
-/*
-offer info: num item, cost,
-
- */
-
-    private void buyItem(int numItem, double cost, String item) {
-        boolean offerAgain1 = true;
-        int offerVal = 0;
-        double totalPrice = 0;
-        while (offerAgain1) {
-            System.out.println("This offer for " + item + " is " + numItem + " for " + cost + ". How many of this offer would you like to purchase?");
-            scan = new Scanner(System.in);
-            offerVal = scan.nextInt();
-            totalPrice = cost * 5;
-            if (totalPrice > inv.getCurrentMoney()) {
-                offerVal = 0;
-                System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
-                scan.nextLine();
-                String purchaseAgain = scan.nextLine();
-                if (purchaseAgain.equals("y")) {
-                    offerAgain1 = true;
-                } else {
-                    offerAgain1 = false;
-                }
-            }
-
-        }
-        int itemsBought = offerVal * numItem;
-        if (item.equals("cups")) {
-            inv.incrementCups(itemsBought);
-        }
-        if (item.equals("lemons")) {
-            inv.incrementLemons(itemsBought);
-        }
-        if (item.equals("ice")) {
-            inv.incrementIce(itemsBought);
-        }
-        if (item.equals("sugar")) {
-            inv.incrementSugar(itemsBought);
-        }
-        currentMoney -= totalPrice;
-        System.out.println("You've purchased " + (itemsBought) + item + "!");//prints total?
     }
 
     public void cupsOffer() {
@@ -132,6 +70,45 @@ offer info: num item, cost,
             buyItem(5, 4, "sugar");
 
         }
-        //item(): 2-3 offers, display offers, which offer do you want?, how many times do you want to buy this offer?
+
+    }
+
+    private void buyItem(int numItem, double cost, String item) {
+        boolean offerAgain1 = true;
+        int offerVal = 0;
+        double totalPrice = 0;
+        while (offerAgain1) {
+            System.out.println("This offer for " + item + " is " + numItem + " for " + cost + ". How many of this offer would you like to purchase?");
+            scan = new Scanner(System.in);
+            offerVal = scan.nextInt();
+            totalPrice = cost * 5;
+            if (totalPrice > inv.getCurrentMoney()) {
+                offerVal = 0;
+                System.out.println("You don't have enough money! \n Do you want to purchase a smaller amount of this offer?(y/n)");
+                scan.nextLine();
+                String purchaseAgain = scan.nextLine();
+                if (purchaseAgain.equals("y")) {
+                    offerAgain1 = true;
+                } else {
+                    offerAgain1 = false;
+                }
+            }
+
+        }
+        int itemsBought = offerVal * numItem;
+        if (item.equals("cups")) {
+            inv.incrementCups(itemsBought);
+        }
+        if (item.equals("lemons")) {
+            inv.incrementLemons(itemsBought);
+        }
+        if (item.equals("ice")) {
+            inv.incrementIce(itemsBought);
+        }
+        if (item.equals("sugar")) {
+            inv.incrementSugar(itemsBought);
+        }
+        inv.incrementCurrentMoney(-1*totalPrice);
+        System.out.println("You've purchased " + (itemsBought) + item + "!");//prints total?
     }
 }

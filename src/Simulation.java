@@ -1,30 +1,7 @@
-import java.util.Scanner;
 
 public class Simulation {
         private Inventory inv;
-//        private int lemons;
-//        private int cups;
-//        private int ice;
-//        private int sugar;
-//        private int currentMoney;
-//        private int lemonAdjustment;
-//        private int iceAdjustment;
-//        private int sugarAdjustment;
-//        private double cupPrice;
 
-
-//        public Simulation(){
-//            lemons = 0;
-//            cups = 0;
-//            ice = 0;
-//            sugar = 0;
-//            currentMoney = 20;
-//            lemonAdjustment = 1;
-//            iceAdjustment = 5;
-//            sugarAdjustment = 4;
-//            cupPrice = 0.25;
-//
-//        }
 
         public Simulation(Inventory inv){
             this.inv = inv;

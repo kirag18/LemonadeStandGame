@@ -21,7 +21,7 @@ public class Inventory {
         cups = 0;
         ice = 0;
         sugar = 0;
-        currentMoney = 0;
+        currentMoney = 20;
         lemonAdjustment = 0;
         iceAdjustment = 0;
         sugarAdjustment = 0;

@@ -28,18 +28,13 @@ public class LemonadeLogic {
         welcome();
         for (int i = 1; i<=totalDays; i++){
             adjustProportions();
-//            player.setCups(buy.getCups());
-//            player.setSugar(buy.getSugar());
-//            player.setIce(buy.getIce());
-//            player.setLemons(buy.getLemons());
-//            player.setCurrentMoney(buy.getCurrentMoney());
-            player = new Simulation(inv);
-
             player.simulate();
-            buy = new Buying(inv);
             System.out.println("day "+currentDay+" complete");
-            System.out.println("All of your remaining ice melted");
-            inv.incrementIce(-1* inv.getIce());
+            if (inv.getIce() >= 0){
+                System.out.println("All of your remaining ice melted");
+                inv.incrementIce(-1* inv.getIce());
+            }
+
         }
         overallAnalytics();
     }
@@ -54,14 +49,7 @@ public class LemonadeLogic {
                 System.out.println("Try again. Enter a new value that is between 1 & 7.");
             }
         }
-//        while (startingMoney>30 || startingMoney<10){
-//            System.out.println("How much money do you want to start with(int between 10-30)? $");
-//            startingMoney = scan.nextInt();
-//            if (startingMoney>30 || startingMoney<10){
-//                System.out.println("Try again. Enter a new value that is between 10 & 30.");
-//            }
-//        }
-//        currentMoney = startingMoney;
+
         scan.nextLine();
 
 
