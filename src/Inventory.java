@@ -8,9 +8,12 @@ public class Inventory {
     private int iceAdjustment;
     private int sugarAdjustment;
     private double cupPrice;
+    private int totalPasserby;
+    private int totalBuyers;
+    private double allRevenue;
+    private double allExpenses;
 
     //TODO: add these variables for analytics
-    //total final - original = profit
     //total spendings
     //number of paying customers total
     //total people
@@ -22,10 +25,10 @@ public class Inventory {
         ice = 0;
         sugar = 0;
         currentMoney = 20;
-        lemonAdjustment = 0;
-        iceAdjustment = 0;
-        sugarAdjustment = 0;
-        cupPrice = 0;
+        lemonAdjustment = 1;
+        iceAdjustment = 2;
+        sugarAdjustment = 1;
+        cupPrice = 0.1;
     }
     public int getLemons(){
         return lemons;
@@ -53,6 +56,18 @@ public class Inventory {
     }
     public double getCupPrice(){
         return cupPrice;
+    }
+    public int getTotalPasserby(){
+        return totalPasserby;
+    }
+    public int getTotalBuyers(){
+        return totalBuyers;
+    }
+    public double getAllRevenue(){
+        return allRevenue;
+    }
+    public double getAllExpenses(){
+        return allExpenses;
     }
 
     public void setLemonAdjustment(int adjustment){
@@ -82,6 +97,18 @@ public class Inventory {
     }
     public void incrementCurrentMoney(double inc){
         currentMoney += inc;
+    }
+    public void incrementTotalPasserby(int inc){
+        totalPasserby += inc;
+    }
+    public void incrementTotalBuyers(int inc){
+        totalBuyers += inc;
+    }
+    public void incrementAllRevenue(double inc){
+        allRevenue += inc;
+    }
+    public void incrementAllExpenses(double inc){
+        allExpenses += inc;
     }
 
 }

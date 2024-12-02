@@ -5,10 +5,10 @@ public class Runner {
     }
 }
 
-//overloaded constructor(inventory)
-//overloaded method(    public void printInventory() {)
-//use indexOf() to check if there is an l in name. if yes, 1 free lemon
-//nested iteration
+//overloaded constructor(NOT DONE, go to inv)
+//overloaded method(done)
+//use indexOf() to check if there is an l in name. if yes, 1 free lemon(done)
+//nested iteration(done)
 //implement analytics stuff
 
 
