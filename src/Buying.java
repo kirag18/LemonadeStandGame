@@ -19,6 +19,7 @@ public class Buying {
         System.out.println("Sugar: " + inv.getSugar());
         System.out.println("Ice: " + inv.getIce());
     }
+
     public void printInventory(double money, int cups, int lemons, int sugar, int ice) {
         System.out.println("Money: " + money);
         System.out.println("Cups: " + cups);
@@ -39,9 +40,6 @@ public class Buying {
     public void cupsOffer() {
         System.out.println("There are 2 offers to choose from: \n1) 5 cups for $5 \n2) 10 cups for $9 \n Which would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-//        if (!(offerChoice.equals("1") || offerChoice.equals("2"))){
-//            scan.nextLine();
-//        }
         if (offerChoice.equals("1")) {
             buyItem(5, 5, "cups");
 
@@ -54,9 +52,7 @@ public class Buying {
     public void lemonsOffer() {
         System.out.println("There are 2 offers to choose from: \n1) 5 lemons for $3\n2) 10 lemons for $5 \n Which would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-//        if (!(offerChoice.equals("1") || offerChoice.equals("2"))){
-//            scan.nextLine();
-//        }
+
         if (offerChoice.equals("1")) {
             buyItem(5, 3, "lemons");
         } else {
@@ -68,9 +64,7 @@ public class Buying {
     public void iceOffer() {
         System.out.println("There are 2 offers to choose from: \n1) 10 cubes of ice for $2\n2) 20 cubes of ice for $3 \nWhich would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-//        if (!(offerChoice.equals("1") || offerChoice.equals("2"))){
-//            scan.nextLine();
-//        }
+
         if (offerChoice.equals("1")) {
             buyItem(10, 2, "ice");
         } else {
@@ -81,9 +75,6 @@ public class Buying {
     public void sugarOffer(){
         System.out.println("There are 2 offers to choose from: \n1) 2 cups of sugar for $3\n2) 5 cups of sugar for $4 \nWhich would you like?(type 1 or 2)");
         String offerChoice = scan.nextLine();
-//        if (!(offerChoice.equals("1") || offerChoice.equals("2"))){
-//            scan.nextLine();
-//        }
         if (offerChoice.equals("1")) {
             buyItem(2, 3, "sugar");
         } else {
@@ -95,6 +86,7 @@ public class Buying {
 
     private void buyItem(int numItem, double cost, String item) {
         boolean offerAgain1 = true;
+        boolean bought = false;
         int offerVal = 0;
         double totalPrice = 0;
         while (offerAgain1) {
@@ -115,24 +107,28 @@ public class Buying {
                 }
             }else{
                 offerAgain1 = false;
+                bought = true;
             }
 
         }
-        int itemsBought = offerVal * numItem;
-        if (item.equals("cups")) {
-            inv.incrementCups(itemsBought);
+        if (bought){
+            int itemsBought = offerVal * numItem;
+            if (item.equals("cups")) {
+                inv.incrementCups(itemsBought);
+            }
+            if (item.equals("lemons")) {
+                inv.incrementLemons(itemsBought);
+            }
+            if (item.equals("ice")) {
+                inv.incrementIce(itemsBought);
+            }
+            if (item.equals("sugar")) {
+                inv.incrementSugar(itemsBought);
+            }
+            inv.incrementCurrentMoney(-1*totalPrice);
+            inv.incrementAllExpenses(totalPrice);
+            System.out.println("You've purchased " + (itemsBought) + item + "!");
         }
-        if (item.equals("lemons")) {
-            inv.incrementLemons(itemsBought);
-        }
-        if (item.equals("ice")) {
-            inv.incrementIce(itemsBought);
-        }
-        if (item.equals("sugar")) {
-            inv.incrementSugar(itemsBought);
-        }
-        inv.incrementCurrentMoney(-1*totalPrice);
-        inv.incrementAllExpenses(totalPrice);
-        System.out.println("You've purchased " + (itemsBought) + item + "!");//prints total?
+
     }
 }

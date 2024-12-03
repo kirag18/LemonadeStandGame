@@ -31,10 +31,11 @@ public class LemonadeLogic {
             buying();
             adjustProportions();
             int numCustomers = player.peoplePerDay();
+
             boolean soldOut = false;
             int x = 1;
-            while (!soldOut || x < numCustomers){
-                System.out.println("hi");//Are we entering the loop??
+            while (!soldOut && x < numCustomers){
+                player.simulate();
                 if (inv.getLemons()<=0 || inv.getCups()<= 0 || inv.getIce()<=0 ||inv.getSugar()<=0){
                     soldOut = true;
                 }
