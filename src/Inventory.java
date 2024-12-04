@@ -104,7 +104,7 @@ public class Inventory {
      * @return the current balance of the player
      */
     public double getCurrentMoney(){
-        return currentMoney;
+        return (Math.round(100*currentMoney)/100.0);
     }
     /**
      * returns the current number of lemons per cup

@@ -38,13 +38,14 @@ public class LemonadeLogic {
                 player.simulate();
                 if (inv.getLemons()<=0 || inv.getCups()<= 0 || inv.getIce()<=0 ||inv.getSugar()<=0){
                     soldOut = true;
+                    System.out.println("You ran out of some items. you are sold out for the day");
                 }
                 x++;
             }
 
             System.out.println("day "+currentDay+" complete");
             if (inv.getIce() >= 0){
-                System.out.println("All of your remaining ice melted");
+                System.out.println("All of your remaining ice melted.  It was a very hot day");
                 inv.incrementIce(-1* inv.getIce());
             }
             currentDay++;
@@ -54,15 +55,16 @@ public class LemonadeLogic {
     }
     public void welcome(){
         System.out.println("Welcome to the Lemonade Stand Game!!!");
-        System.out.println("Enter your name: ");
+        System.out.print("Enter your name: ");
         name = scan.nextLine();
         if (name.toLowerCase().indexOf("l")>=0){
             System.out.println("Congrats!! since you have an \"L\" in your name you get a free lemon");
             inv.incrementLemons(1);
         }
         while (totalDays<1 || totalDays>7){
-            System.out.println("How many days do you want to play for(1-7)? ");
+            System.out.print("How many days do you want to play for(1-7)? ");
             totalDays = scan.nextInt();
+            scan.nextLine();
             if (totalDays<1 || totalDays>7){
                 System.out.println("Try again. Enter a new value that is between 1 & 7.");
             }
@@ -106,18 +108,20 @@ public class LemonadeLogic {
             if (item.equals("n")){
                 isAdjusting = false;
             }else if (item.equals("1")){
-                System.out.println("What new value do you want per cup? ");
+                System.out.print("What new value do you want per cup? ");
                 inv.setCupPrice(scan.nextDouble());
             }else if (item.equals("2")){
-                System.out.println("What new value do you want for lemons per cup? ");
+                System.out.print("What new value do you want for lemons per cup? ");
                 inv.setLemonAdjustment(scan.nextInt());
             }else if(item.equals("3")){
-                System.out.println("What new value do you want for sugar per cup? ");
-                inv.setIceAdjustment(scan.nextInt());
-            }else if (item.equals("4")){
-                System.out.println("What new value do you want for ice per cup? ");
+                System.out.print("What new value do you want for sugar per cup? ");
                 inv.setSugarAdjustment(scan.nextInt());
+            }else if (item.equals("4")){
+                System.out.print("What new value do you want for ice per cup? ");
+                inv.setIceAdjustment(scan.nextInt());
             }
+            scan.nextLine();
+            System.out.println();
         }
     }
 

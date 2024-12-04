@@ -5,11 +5,8 @@ public class Runner {
     }
 }
 
-//overloaded constructor(NOT DONE, go to inv)
-//overloaded method(done)
-//use indexOf() to check if there is an l in name. if yes, 1 free lemon(done)
-//nested iteration(done)
-//implement analytics stuff
+//round money
+//spacing and stuff from the adjustments stuff
 
 
 //technical highlights:
