@@ -6,6 +6,7 @@ public class Simulation {
         public Simulation(Inventory inv){
             this.inv = inv;
         }
+
         public int peoplePerDay(){
             int numCustomers = (int)(Math.random() * 41)+80;
             inv.incrementTotalPasserby(numCustomers);
