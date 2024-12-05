@@ -67,8 +67,8 @@ public class Inventory {
         sugar = 0;
         currentMoney = 20;
         lemonAdjustment = 1;
-        iceAdjustment = 2;
-        sugarAdjustment = 1;
+        iceAdjustment = 5;
+        sugarAdjustment = 2;
         cupPrice = 0.1;
     }
     /**
@@ -154,7 +154,7 @@ public class Inventory {
      * @return the total revenue from lemonade
      */
     public double getAllRevenue(){
-        return allRevenue;
+        return (Math.round(100*allRevenue)/100.0);
     }
     /**
      * returns the current expenses from buying

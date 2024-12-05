@@ -9,7 +9,7 @@ public class Runner {
 //spacing and stuff from the adjustments stuff
 
 
-//technical highlights:
+////technical highlights:
 //data class
 //private helper method that abstracts buying
 //random selection for simulation??

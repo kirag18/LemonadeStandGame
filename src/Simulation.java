@@ -13,7 +13,13 @@ public class Simulation {
         }
 
         public void simulate(){
-            int buyProbability = (int)(Math.random() * 31)+60; //TODO: implement a cool probability
+            int buyProbability = (int)(Math.random() * 31)+60;
+            if (inv.getCupPrice()>1){
+                buyProbability /= (int) inv.getCupPrice()+2;
+            }
+            if (inv.getIceAdjustment()<= 2){
+                buyProbability /= inv.getIceAdjustment()+1;
+            }
             int rand = (int) (Math.random() * 100)+1;
             if (rand <= buyProbability) {
                 inv.incrementLemons(-1 * inv.getLemonAdjustment());
@@ -33,7 +39,7 @@ public class Simulation {
             System.out.println("Your profit was $" + (inv.getAllRevenue() - inv.getAllExpenses()));
             System.out.println(inv.getTotalPasserby() + " people stopped by your stand");
             System.out.println(inv.getTotalBuyers() + " people bought from your stand");
-            System.out.println("You had a " +(100.0*inv.getTotalBuyers()/inv.getTotalPasserby()) +"% buy rate");
+            System.out.println("You had a " +(100.0*(Math.round(100*(inv.getTotalBuyers()/inv.getTotalPasserby()))/100.0)) +"% buy rate");
         }
 
 

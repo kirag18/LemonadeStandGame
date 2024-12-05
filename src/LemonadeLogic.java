@@ -42,10 +42,11 @@ public class LemonadeLogic {
                 }
                 x++;
             }
-
+            System.out.println("----------------------------");
             System.out.println("day "+currentDay+" complete");
-            if (inv.getIce() >= 0){
-                System.out.println("All of your remaining ice melted.  It was a very hot day");
+            System.out.println("----------------------------");
+            if (inv.getIce() >= 0 && Math.random()>0.49){
+                System.out.println("All of your remaining ice melted. It was a very hot day!!");
                 inv.incrementIce(-1* inv.getIce());
             }
             currentDay++;
@@ -70,7 +71,6 @@ public class LemonadeLogic {
             }
         }
 
-        scan.nextLine();
 
 
 
@@ -110,17 +110,21 @@ public class LemonadeLogic {
             }else if (item.equals("1")){
                 System.out.print("What new value do you want per cup? ");
                 inv.setCupPrice(scan.nextDouble());
+                scan.nextLine();
             }else if (item.equals("2")){
                 System.out.print("What new value do you want for lemons per cup? ");
                 inv.setLemonAdjustment(scan.nextInt());
+                scan.nextLine();
             }else if(item.equals("3")){
                 System.out.print("What new value do you want for sugar per cup? ");
                 inv.setSugarAdjustment(scan.nextInt());
+                scan.nextLine();
             }else if (item.equals("4")){
                 System.out.print("What new value do you want for ice per cup? ");
                 inv.setIceAdjustment(scan.nextInt());
+                scan.nextLine();
             }
-            scan.nextLine();
+
             System.out.println();
         }
     }
