@@ -161,7 +161,7 @@ public class Inventory {
      * @return the current expenses from buying
      */
     public double getAllExpenses(){
-        return allExpenses;
+        return (Math.round(100*allExpenses)/100.0);
     }
 
     /**
