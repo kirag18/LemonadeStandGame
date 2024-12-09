@@ -104,24 +104,45 @@ public class LemonadeLogic {
             System.out.print("Which item proportion do you want to adjust(n for none)(enter an int)? ");
             String item = scan.nextLine();
 
-
             if (item.equals("n")){
                 isAdjusting = false;
             }else if (item.equals("1")){
                 System.out.print("What new value do you want per cup? ");
-                inv.setCupPrice(scan.nextDouble());
+                double c = scan.nextDouble();
+                if (c>10){
+                    System.out.println("too high. try again");
+                }else if (c<= 0){
+                    System.out.println("too low. try again");
+                }else{
+                    inv.setCupPrice(c);
+                }
                 scan.nextLine();
             }else if (item.equals("2")){
                 System.out.print("What new value do you want for lemons per cup? ");
-                inv.setLemonAdjustment(scan.nextInt());
+                int l = scan.nextInt();
+                if (l<= 0){
+                    System.out.println("too low. try again");
+                }else{
+                    inv.setLemonAdjustment(l);
+                }
                 scan.nextLine();
             }else if(item.equals("3")){
                 System.out.print("What new value do you want for sugar per cup? ");
-                inv.setSugarAdjustment(scan.nextInt());
+                int s = scan.nextInt();
+                if (s<= 0){
+                    System.out.println("too low. try again");
+                }else{
+                    inv.setSugarAdjustment(s);
+                }
                 scan.nextLine();
             }else if (item.equals("4")){
                 System.out.print("What new value do you want for ice per cup? ");
-                inv.setIceAdjustment(scan.nextInt());
+                int ice = scan.nextInt();
+                if (ice<= 0){
+                    System.out.println("too low. try again");
+                }else{
+                    inv.setIceAdjustment(ice);
+                }
                 scan.nextLine();
             }
 
